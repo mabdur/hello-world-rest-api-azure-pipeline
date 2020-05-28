@@ -7,7 +7,7 @@ metadata:
   namespace: default
 spec:
   replicas: 1 #CHANGE
-  minReadySeconds: 40
+  minReadySeconds: 42
   selector:
     matchLabels:
       app: currency-exchange

@@ -14,25 +14,25 @@ stages:
   jobs: 
   - job: job1
     steps:
-    - bash:echo job1 build
+    - bash: echo job1 build
   - job: job2
     steps:
-    - bash:echo job2 build
+    - bash: echo job2 build
 - stage: devDeploy
   jobs: 
   - job: devDeployjob1
     steps:
-    - bash:echo devDeployjob1 build
+    - bash: echo devDeployjob1 build
 - stage: QADeploy
   jobs: 
   - job: QADeployjob1
     steps:
-    - bash:echo QADeployjob1 build
+    - bash: echo QADeployjob1 build
 - stage: ProdDeploy
   jobs: 
   - job: ProdDeployjob1
     steps:
-    - bash:echo ProdDeployjob1 build
+    - bash: echo ProdDeployjob1 build
 
 
 

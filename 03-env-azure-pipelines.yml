@@ -8,9 +8,10 @@ pool:
 stages: 
 - stage: build
   jobs:
-    - job: Buildjob1
-      steps:
-      - bash: echo Build Test!
+  - job: Buildjob1
+    steps:
+    - bash: echo Build Test!
+
 - stage: Dev build
   jobs:
   -  deployment: 
@@ -20,6 +21,7 @@ stages:
         deploy:
           steps:
           -  script: echo deploy to  dev $(environment)
+          
 - stage: QA build
   jobs:
   -  deployment: 

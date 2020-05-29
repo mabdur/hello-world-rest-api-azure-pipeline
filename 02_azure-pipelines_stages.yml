@@ -26,7 +26,7 @@ stages:
   - job: devDeployjob1
     steps:
     - bash: echo devDeployjob1 env $(envorinment) build
-    - bash: $(env_var)
+    - bash: echo ....... $(env_var)
 - stage: QADeploy
   variables: 
    envorinment: QA

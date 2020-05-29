@@ -14,18 +14,20 @@ stages:
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: '**/*.yaml'
+        Contents: |
+           **/*.yaml
+           **/*.tf
         TargetFolder: '$(Build.ArtifactStaggingDirectory)'
-    - bash: ls -R $(Build.ArtifactStaggingDirectory)
+    - bash: ls $(Build.ArtifactStaggingDirectory)
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'drop'
         publishLocation: 'Container'
-  - job: job2
-    steps:
-    - bash: echo job2 build
-    - bash: echo 
+  # - job: job2
+  #   steps:
+  #   - bash: echo job2 build
+  #   - bash: echo 
 - stage: devDeploy
   dependsOn: build
   variables: 

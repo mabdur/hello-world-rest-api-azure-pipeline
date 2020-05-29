@@ -19,16 +19,20 @@ stages:
     steps:
     - bash: echo job2 build
 - stage: devDeploy
+  dependsOn: build
   jobs: 
   - job: devDeployjob1
     steps:
     - bash: echo devDeployjob1 build
+    - bash: $(env_var)
 - stage: QADeploy
+  dependsOn: build
   jobs: 
   - job: QADeployjob1
     steps:
     - bash: echo QADeployjob1 build
 - stage: ProdDeploy
+  dependsOn: QADeploy
   jobs: 
   - job: ProdDeployjob1
     steps:

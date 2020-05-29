@@ -15,34 +15,40 @@ stages:
   - job: job1
     steps:
     - bash: echo job1 build
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '**/*.yaml'
+        TargetFolder: '$(Build.ArtifactStaggingDirectory)'
   - job: job2
     steps:
     - bash: echo job2 build
-- stage: devDeploy
-  dependsOn: build
-  variables: 
-   envorinment: dev
-  jobs: 
-  - job: devDeployjob1
-    steps:
-    - bash: echo devDeployjob1 env $(envorinment) build
-    - bash: echo ....... $(env_var)
-- stage: QADeploy
-  variables: 
-   envorinment: QA
-  dependsOn: build
-  jobs: 
-  - job: QADeployjob1
-    steps:
-    - bash: echo QADeployjob1 env $(envorinment) build
-- stage: ProdDeploy
-  variables: 
-   envorinment: Prod
-  dependsOn: QADeploy
-  jobs: 
-  - job: ProdDeployjob1
-    steps:
-    - bash: echo ProdDeployjob1 env $(envorinment)build
+    - bash: echo 
+# - stage: devDeploy
+#   dependsOn: build
+#   variables: 
+#    envorinment: dev
+#   jobs: 
+#   - job: devDeployjob1
+#     steps:
+#     - bash: echo devDeployjob1 env $(envorinment) build
+#     - bash: echo ....... $(env_var)
+# - stage: QADeploy
+#   variables: 
+#    envorinment: QA
+#   dependsOn: build
+#   jobs: 
+#   - job: QADeployjob1
+#     steps:
+#     - bash: echo QADeployjob1 env $(envorinment) build
+# - stage: ProdDeploy
+#   variables: 
+#    envorinment: Prod
+#   dependsOn: QADeploy
+#   jobs: 
+#   - job: ProdDeployjob1
+#     steps:
+#     - bash: echo ProdDeployjob1 env $(envorinment)build
 
 
 

@@ -13,20 +13,20 @@ stages:
       - bash: echo Build Test!
 - stage: Dev build
   jobs:
-    -  deployment: 
-       environment: Dev
-       strategy: 
-        runOnce:
-           deploy:
-              steps:
-                -  script: echo deploy to  $(environment)
+  -  deployment: 
+     environment: Dev
+     strategy: 
+      runOnce:
+        deploy:
+          steps:
+          -  script: echo deploy to  dev $(environment)
 - stage: QA build
   jobs:
-    -  deployment: 
-       environment: QA
-       strategy: 
-        runOnce:
-           deploy:
-              steps:
-                -  script: echo deploy to $(environment)
+  -  deployment: 
+     environment: QA
+     strategy: 
+      runOnce:
+        deploy:
+          steps:
+          -  script: echo deploy to qa
 

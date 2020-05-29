@@ -20,11 +20,11 @@ stages:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
         Contents: '**/*.yaml'
         TargetFolder: '$(Build.ArtifactStaggingDirectory)'
-    - bash: each ls -R $(Build.ArtifactStaggingDirectory)
-  - job: job2
-    steps:
-    - bash: echo job2 build
-    - bash: echo 
+    - bash: ls -R $(Build.ArtifactStaggingDirectory)
+  # - job: job2
+  #   steps:
+  #   - bash: echo job2 build
+  #   - bash: echo 
 # - stage: devDeploy
 #   dependsOn: build
 #   variables: 

@@ -11,14 +11,7 @@ stages:
   - job: job1
     steps:
     - bash: echo job1 build
-    # - task: CopyFiles@2
-    #   inputs:
-    #     SourceFolder: '$(System.DefaultWorkingDirectory)'
-    #     Contents: |
-    #        **/*.yaml
-    #        **/*.tf
-    #     TargetFolder: '$(Build.ArtifactStaggingDirectory)'
-    # - bash: ls $(Build.ArtifactStaggingDirectory)
+    
     # Archive files
 # Compress files into .7z, .tar.gz, or .zip
     - task: ArchiveFiles@1
@@ -27,10 +20,17 @@ stages:
        rootFolder: true 
        archiveType: default
        #tarCompression: 'gz' # Optional. Options: gz, bz2, xz, none
-       archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
+       archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip' 
        replaceExistingArchive: true 
         #verbose: # Optional
         #quiet: # Optional
+    - task: CopyFiles@2
+      inputs:
+         SourceFolder: '$(System.DefaultWorkingDirectory)'
+         Contents: |
+            **/*.zip
+         TargetFolder: '$(Build.ArtifactStaggingDirectory)'
+    - bash: ls $(Build.ArtifactStaggingDirectory)
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'

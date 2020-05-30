@@ -10,20 +10,23 @@ stages:
   jobs: 
   - job: job1
     steps:
-    - bash: echo job1 build
+    - bash: echo job1 list dir to build
+    - bash : ls $(System.DefaultWorkingDirectory)
+    - bash : ls $(Build.ArtifactStaggingDirectory)
     
     # Archive files
 # Compress files into .7z, .tar.gz, or .zip
     - task: ArchiveFiles@1
+   
       inputs:
        SourceFolder: $(System.DefaultWorkingDirectory)
-       rootFolder: true 
        archiveType: default
        #tarCompression: 'gz' # Optional. Options: gz, bz2, xz, none
        archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip' 
        replaceExistingArchive: true 
         #verbose: # Optional
         #quiet: # Optional
+    - bash : ls $(Build.ArtifactStaggingDirectory)
     - task: CopyFiles@2
       inputs:
          SourceFolder: '$(System.DefaultWorkingDirectory)'

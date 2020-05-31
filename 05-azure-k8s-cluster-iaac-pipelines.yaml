@@ -21,8 +21,8 @@ steps:
     backendType: 'azurerm'
     backendServiceArm: 'azure-subscription-res-manger-connection'
     ensureBackend: true
-    backendAzureRmResourceGroupName: 'terrform-backend-ar'
+    backendAzureRmResourceGroupName: 'terrformbackendar'
     backendAzureRmResourceGroupLocation: 'westeurope'
-    backendAzureRmStorageAccountName: 'storageacctabduraxyz'
-    backendAzureRmContainerName: 'storageacctabdurConainer'
+    backendAzureRmStorageAccountName: 'storageactarxzy'
+    backendAzureRmContainerName: 'storageactarxzyconainer'
     backendAzureRmKey: 'k8s-dev-tfstate'

@@ -23,6 +23,6 @@ steps:
     ensureBackend: true
     backendAzureRmResourceGroupName: 'terrform-backend-ar'
     backendAzureRmResourceGroupLocation: 'westeurope'
-    backendAzureRmStorageAccountName: 'storageacctabdur1912'
+    backendAzureRmStorageAccountName: 'storageacctabduraxyz'
     backendAzureRmContainerName: 'storageacctabdurConainer'
     backendAzureRmKey: 'k8s-dev-tfstate'

@@ -1,0 +1,57 @@
+# Docker
+# Build a Docker image 
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:  
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        containerRegistry: 'abdur_dockerHub-Azure'
+        repository: 'mabdur/currency-exchange-devops'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(tag)'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'manifest'
+        publishLocation: 'Container'
+stages:
+- stage: Deploy
+  displayName: Deploy image
+  jobs:  
+  - job: Deploy
+    displayName: Deploy
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+     - task: DownloadPipelineArtifact@2
+       inputs:
+         buildType: 'current'
+         artifactName: 'manifest'
+         itemPattern: '**/*.yaml'
+         targetPath: '$(System.ArtifactStagingDirectory)'
+     - task: KubernetesManifest@0
+       inputs:
+         action: 'deploy'
+         kubernetesServiceConnection: 'k8s_connection'
+         namespace: 'default'
+         manifests: '$(System.ArtifactStagingDirectory)/deployment.yaml'
+         containers: 'mabdur/currency-exchange-devops:${tag}'

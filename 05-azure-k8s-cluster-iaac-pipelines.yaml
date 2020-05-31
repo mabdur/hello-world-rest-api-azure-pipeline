@@ -3,7 +3,7 @@ trigger:
 - master
 
 pool:
- vmImage: 'ubuntu-lastest'
+ vmImage: 'ubuntu-latest'
 
 steps: 
 - script: echo k8s terraform azure
